@@ -423,6 +423,35 @@ autocmd FileType go nnoremap <buffer> <C-d> :call GodefUnderCursor()<cr>
 let g:godef_same_file_in_same_window=1 "函数在同一个文件中时不需要打开新窗口
 let g:godef_split=0 "在光标下定义出打开新窗口
 
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
 "eslint
 let g:jsx_ext_required = 0
 let g:syntastic_javascript_checkers = ['eslint']
@@ -439,6 +468,12 @@ function! ESlintFormatter()
     endif
     let g:formatdef_eslint = '"SRC=eslint-temp-${RANDOM}.js; cat - >$SRC; ' . l:eslint . ' --fix $SRC >/dev/null 2>&1; cat $SRC | perl -pe \"chomp if eof\"; rm -f $SRC"'
 endfunction
+
+"function! UpdateCtags()
+"    !ctags -R --languages=javascript  --exclude=node_modules
+"    :set tags=tags
+"endfunction
+"nmap <F4> :call UpdateCtags()<CR>
 
 autocmd FileType javascript nnoremap <C-f> :Autoformat<CR>:w<CR>
 autocmd FileType go nnoremap <C-f> :Autoformat<CR>:w<CR>
