@@ -30,7 +30,7 @@ Bundle 'vim-scripts/pylint.vim'
 " Go
 Bundle 'dgryski/vim-godef'
 Bundle 'Blackrush/vim-gocode'
-"Bundle 'fatih/vim-go'
+Bundle 'fatih/vim-go'
 
 " javascripts
 Bundle 'leshill/vim-json'
@@ -419,6 +419,8 @@ let g:C_Ctrl_j   = 'off'
 
 let g:pydiction_location='~/.vim/bundle/pydiction'
 "go
+"
+autocmd FileType go nnoremap <buffer> gd :call GodefUnderCursor()<cr> 
 autocmd FileType go nnoremap <buffer> <C-d> :call GodefUnderCursor()<cr>
 let g:godef_same_file_in_same_window=1 "函数在同一个文件中时不需要打开新窗口
 let g:godef_split=0 "在光标下定义出打开新窗口
