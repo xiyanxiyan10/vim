@@ -10,39 +10,38 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
+
+Bundle 'Chiel92/vim-autoformat'
+Bundle 'ternjs/tern_for_vim'
+
 Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
 Bundle 'honza/vim-snippets'
 Bundle 'mileszs/ack.vim'
 Bundle 'vimwiki'
 Bundle 'bufexplorer.zip'
-Bundle 'OmniCppComplete'
 Bundle 'pydoc.vim'
-Bundle 'lepture/vim-css'
 Bundle 'mattn/emmet-vim'
 Bundle 'vim-scripts/indentpython.vim'
-Bundle 'Valloric/YouCompleteMe'
 Bundle 'rkulla/pydiction'
 Bundle 'nvie/vim-flake8'
 Bundle 'vim-scripts/pylint.vim'
 
+" Go
 Bundle 'dgryski/vim-godef'
 Bundle 'Blackrush/vim-gocode'
 "Bundle 'fatih/vim-go'
+
+" javascripts
 Bundle 'leshill/vim-json'
 Bundle 'tpope/vim-markdown'
-
-" vim actions
-Bundle 'easymotion/vim-easymotion'
-"
-" React
 Bundle 'pangloss/vim-javascript'
 Bundle 'mxw/vim-jsx'
+Bundle 'othree/html5.vim'
+Bundle 'lepture/vim-css'
 
-" Es6
-Bundle 'tomtom/tlib_vim'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'isRuslan/vim-es6'
+" Hard to Install
+"Bundle 'Valloric/YouCompleteMe'
 
 "allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -198,6 +197,9 @@ set laststatus=2
 
 "recalculate the trailing whitespace warning when idle, and after saving
 autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
+
+set cursorcolumn
+set cursorline
 
 "return '[\s]' if trailing white space is detected
 "return '' otherwise
@@ -418,10 +420,32 @@ let g:C_Ctrl_j   = 'off'
 let g:pydiction_location='~/.vim/bundle/pydiction'
 "go
 autocmd FileType go nnoremap <buffer> <C-d> :call GodefUnderCursor()<cr>
-let g:godef_same_file_in_same_window=1 """函数在同一个文件中时不需要打开新窗口
+let g:godef_same_file_in_same_window=1 "函数在同一个文件中时不需要打开新窗口
 let g:godef_split=0 "在光标下定义出打开新窗口
+
 "eslint
+let g:jsx_ext_required = 0
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_always_populate_loc_list = 1
+" auto-formatter
+function! ESlintFormatter()
+    let l:npm_bin = ''
+    let l:eslint = 'eslint'
+    if executable('npm')
+        let l:npm_bin = split(system('npm bin'), '\n')[0]
+    endif
+    if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
+        let l:eslint = l:npm_bin . '/eslint'
+    endif
+    let g:formatdef_eslint = '"SRC=eslint-temp-${RANDOM}.js; cat - >$SRC; ' . l:eslint . ' --fix $SRC >/dev/null 2>&1; cat $SRC | perl -pe \"chomp if eof\"; rm -f $SRC"'
+endfunction
+
+autocmd FileType javascript nnoremap <C-f> :Autoformat<CR>:w<CR>
+autocmd FileType go nnoremap <C-f> :Autoformat<CR>:w<CR>
+
+"turnjs
+autocmd FileType javascript nnoremap <leader>d :TernDef<CR>
+autocmd FileType javascript setlocal omnifunc=tern#Complete
 
 "VimOrganizer
 autocmd! BufRead,BufWrite,BufWritePost,BufNewFile *.org
