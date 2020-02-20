@@ -12,6 +12,7 @@ go get -v github.com/jstemmer/gotags
 go build && go install 
 sudo cp bin/gocode /usr/local/bin
 sudo cp bin/goimports /usr/local/bin
+# godef only work when GO111MODULE=off
 sudo cp bin/godef /usr/local/bin
 sudo cp bin/gotags /usr/local/bin
 
