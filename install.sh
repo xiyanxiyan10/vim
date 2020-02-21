@@ -1,6 +1,12 @@
 curPath=$(pwd)
 echo $curPath 
-echo "$1"
+
+if [ $# -eq 0 ];
+then
+    echo "please select system, mac or linux"
+    exit
+fi
+# echo "$1"
 
 if [ "$1" = "mac" ];then
 echo "mac system"
@@ -34,6 +40,8 @@ sudo cp bin/gotags /usr/local/bin
 
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
+sudo pip install --upgrade autopep8
+sudo pip install --upgrade flake8
 sudo cnpm install -g eslint-plugin-react
 sudo cnpm install -g eslint
 sudo cnpm install -g prettier

@@ -13,6 +13,7 @@ Bundle 'scrooloose/nerdtree'
 
 Bundle 'Chiel92/vim-autoformat'
 Bundle 'ternjs/tern_for_vim'
+Bundle 'tell-k/vim-autopep8'
 
 Bundle 'scrooloose/syntastic'
 Bundle 'majutsushi/tagbar'
@@ -417,13 +418,13 @@ let g:C_Ctrl_j   = 'off'
 
 "let g:ycm_global_ycm_extra_conf='~/ycm_extra_conf.py'
 
-let g:pydiction_location='~/.vim/bundle/pydiction'
 "go
 "
 autocmd FileType go nnoremap <buffer> gd :call GodefUnderCursor()<cr> 
 autocmd FileType go nnoremap <buffer> <C-d> :call GodefUnderCursor()<cr>
 let g:godef_same_file_in_same_window=1 "函数在同一个文件中时不需要打开新窗口
 let g:godef_split=0 "在光标下定义出打开新窗口
+autocmd FileType go nnoremap <C-f> :Autoformat<CR>:w<CR>
 
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_type_go = {
@@ -478,16 +479,21 @@ endfunction
 "endfunction
 "nmap <F4> :call UpdateCscopeGo()<CR>
 
-autocmd FileType go map <C-_> :Ack -i
 "nmap <C-_>- :cs find c <C-R>=expand("<cword>")<CR><CR>
 
-"autoformat"
-autocmd FileType javascript nnoremap <C-f> :Autoformat<CR>:w<CR>
-autocmd FileType go nnoremap <C-f> :Autoformat<CR>:w<CR>
+"python"
+let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
+let g:pydiction_menu_height = 20
+"let g:formatter_yapf_style = 'pep8'
+"autocmd FileType python nnoremap <C-f> :Autoformat<CR>:w<CR>
+"autocmd FileType python map <buffer> <C-f> :call flake8#Flake8()<CR>
+autocmd FileType python noremap <buffer> <C-f> :call Autopep8()<CR>
+autocmd BufWritePost *.py call flake8#Flake8()
 
-"turnjs
+"js
 autocmd FileType javascript nnoremap <leader>d :TernDef<CR>
 autocmd FileType javascript setlocal omnifunc=tern#Complete
+autocmd FileType javascript nnoremap <C-f> :Autoformat<CR>:w<CR>
 
 let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
 
