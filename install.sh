@@ -14,12 +14,14 @@ echo "mac system"
 brew install ctags-exuberant
 # install ack for mac
 brew install ack
+brew install cscope
 fi
 
 if [ "$1" = "linux" ];then
 echo "linux system"
-sudo apt install ctags
-sudo apt install astyle
+sudo apt-get install ctags
+sudo apt-get install cscope
+sudo apt-get install astyle
 fi
 
 mkdir -p $curPath/src
