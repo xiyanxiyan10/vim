@@ -479,7 +479,18 @@ function! UpdateCscopeGo()
     !cscope -bkq -i cscope.files
 endfunction
 nmap <F4> :call UpdateCscopeGo()<CR>
-autocmd FileType go nmap <C-_> :cs find c <C-R>=expand("<cword>")<CR><CR>
+autocmd FileType go nmap <C-_> :cs find s <C-R>=expand("<cword>")<CR><CR>
+
+
+"python function refer support"
+function! UpdateCscopePython()
+    !find . -name "*.py" > cscope.files
+    !pycscope -i cscope.files
+endfunction
+nmap <F5> :call UpdateCscopePython()<CR>
+autocmd FileType python nmap <C-_> :cs find s <C-R>=expand("<cword>")<CR><CR>
+autocmd FileType python nmap <C-d> :cs find g <C-R>=expand("<cword>")<CR><CR>
+
 
 "python"
 let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'

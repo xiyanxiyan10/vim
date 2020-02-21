@@ -42,6 +42,7 @@ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 sudo pip install --upgrade autopep8
 sudo pip install --upgrade flake8
+sudo pip install --upgrade pycscope
 sudo cnpm install -g eslint-plugin-react
 sudo cnpm install -g eslint
 sudo cnpm install -g prettier
