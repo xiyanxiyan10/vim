@@ -16,7 +16,7 @@ Bundle 'ternjs/tern_for_vim'
 Bundle 'tell-k/vim-autopep8'
 "Bundle 'python-mode/python-mode'
 
-Bundle 'scrooloose/syntastic'
+Bundle 'vim-syntastic/syntastic'
 Bundle 'majutsushi/tagbar'
 Bundle 'honza/vim-snippets'
 Bundle 'mileszs/ack.vim'
@@ -170,7 +170,7 @@ set statusline+=%#identifier#
 set statusline+=%m
 set statusline+=%*
 
-set statusline+=%{fugitive#statusline()}
+"set statusline+=%{fugitive#statusline()}
 
 "display a warning if &et is wrong, or we have mixed-indenting
 set statusline+=%#error#
