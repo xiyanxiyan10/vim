@@ -471,18 +471,25 @@ function! ESlintFormatter()
     let g:formatdef_eslint = '"SRC=eslint-temp-${RANDOM}.js; cat - >$SRC; ' . l:eslint . ' --fix $SRC >/dev/null 2>&1; cat $SRC | perl -pe \"chomp if eof\"; rm -f $SRC"'
 endfunction
 
-"function! UpdateCtags()
-"    !ctags -R --languages=javascript  --exclude=node_modules
-"    :set tags=tags
+"function refer support"
+"function! UpdateCscopeGo()
+"    !find . -name "*.go" > cscope.files
+"    !cscope -bkq -i cscope.files
 "endfunction
-"nmap <F4> :call UpdateCtags()<CR>
+"nmap <F4> :call UpdateCscopeGo()<CR>
 
+autocmd FileType go map <C-_> :Ack -i
+"nmap <C-_>- :cs find c <C-R>=expand("<cword>")<CR><CR>
+
+"autoformat"
 autocmd FileType javascript nnoremap <C-f> :Autoformat<CR>:w<CR>
 autocmd FileType go nnoremap <C-f> :Autoformat<CR>:w<CR>
 
 "turnjs
 autocmd FileType javascript nnoremap <leader>d :TernDef<CR>
 autocmd FileType javascript setlocal omnifunc=tern#Complete
+
+let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
 
 "VimOrganizer
 autocmd! BufRead,BufWrite,BufWritePost,BufNewFile *.org

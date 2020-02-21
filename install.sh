@@ -1,5 +1,21 @@
 curPath=$(pwd)
 echo $curPath 
+echo "$1"
+
+if [ "$1" = "mac" ];then
+echo "mac system"
+# install ctgs for mac
+brew install ctags-exuberant
+# install ack for mac
+brew install ack
+fi
+
+if [ "$1" = "linux" ];then
+echo "linux system"
+sudo apt install ctags
+sudo apt install astyle
+fi
+
 mkdir -p $curPath/src
 export GOPATH=$curPath
 export GO111MODULE=on
@@ -24,6 +40,6 @@ sudo cnpm install -g prettier
 sudo cnpm install -g eslint-plugin-prettier
 sudo cnpm install -g eslint-config-prettier
 sudo cnpm install -g js-beautify
-sudo apt install ctags
-sudo apt install astyle
-# open vim and BundleInstall
+
+
+
