@@ -473,21 +473,19 @@ function! ESlintFormatter()
     let g:formatdef_eslint = '"SRC=eslint-temp-${RANDOM}.js; cat - >$SRC; ' . l:eslint . ' --fix $SRC >/dev/null 2>&1; cat $SRC | perl -pe \"chomp if eof\"; rm -f $SRC"'
 endfunction
 
-"function refer support"
-"function! UpdateCscopeGo()
-"    !find . -name "*.go" > cscope.files
-"    !cscope -bkq -i cscope.files
-"endfunction
-"nmap <F4> :call UpdateCscopeGo()<CR>
-
-"nmap <C-_>- :cs find c <C-R>=expand("<cword>")<CR><CR>
+"go function refer support"
+function! UpdateCscopeGo()
+    !find . -name "*.go" > cscope.files
+    !cscope -bkq -i cscope.files
+endfunction
+nmap <F4> :call UpdateCscopeGo()<CR>
+autocmd FileType go nmap <C-_> :cs find c <C-R>=expand("<cword>")<CR><CR>
 
 "python"
 let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 let g:pydiction_menu_height = 20
 autocmd FileType python noremap <buffer> <C-f> :call Autopep8()<CR>
 autocmd BufWritePost *.py call flake8#Flake8()
-
 " Python-mode
 " Activate rope
 " Keys: 按键：
