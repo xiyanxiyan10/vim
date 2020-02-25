@@ -523,7 +523,7 @@ function! UpdateCscopeGo()
 endfunction
 nmap <F4> :call UpdateCscopeGo()<CR>
 autocmd FileType go nmap <C-]> :cs find s <C-R>=expand("<cword>")<CR><CR>
-autocmd FileType python map <C-f> :ALEToggle<CR>
+autocmd FileType go map <C-f> :ALEToggle<CR>
 
 "python function refer support"
 function! UpdateCscopePython()
@@ -533,7 +533,7 @@ endfunction
 nmap <F5> :call UpdateCscopePython()<CR>
 autocmd FileType python nmap <C-]> :cs find s <C-R>=expand("<cword>")<CR><CR>
 autocmd FileType python nmap <C-d> :cs find g <C-R>=expand("<cword>")<CR><CR>
-
+autocmd FileType python map <C-f> :ALEToggle<CR>
 "python"
 let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 let g:pydiction_menu_height = 20
