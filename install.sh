@@ -42,9 +42,13 @@ sudo cp bin/gotags /usr/local/bin
 
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-sudo pip install --upgrade autopep8
-sudo pip install --upgrade flake8
-sudo pip install --upgrade pycscope
+
+pip install --upgrade autopep8
+pip install --upgrade flake8
+pip install --upgrade pycscope
+pip install vim-vint
+pip install pylint
+sudo gem install mdl
 sudo cnpm install -g eslint-plugin-react
 sudo cnpm install -g eslint
 sudo cnpm install -g prettier
