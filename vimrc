@@ -11,6 +11,7 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
 Bundle 'w0rp/ale'
+Bundle 'altercation/vim-colors-solarized'
 
 Bundle 'ternjs/tern_for_vim'
 "Bundle 'python-mode/python-mode'
@@ -118,8 +119,11 @@ set hidden
 
 set nobackup " no *~ backup files
 "colors koehler
-colors kolor
-
+"colors kolor
+syntax enable
+set background=light
+colorscheme solarized
+let g:solarized_termcolors=256
 "--------------------------------------------------------------------------- 
 " ENCODING SETTINGS
 "--------------------------------------------------------------------------- 
