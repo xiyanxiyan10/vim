@@ -12,9 +12,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
 Bundle 'w0rp/ale'
 
-"Bundle 'Chiel92/vim-autoformat'
 Bundle 'ternjs/tern_for_vim'
-"Bundle 'tell-k/vim-autopep8'
 "Bundle 'python-mode/python-mode'
 
 Bundle 'vim-syntastic/syntastic'
@@ -31,9 +29,7 @@ Bundle 'nvie/vim-flake8'
 Bundle 'vim-scripts/pylint.vim'
 
 " Go
-Bundle 'dgryski/vim-godef'
-"Bundle 'Blackrush/vim-gocode'
-"Bundle 'fatih/vim-go'
+Bundle 'fatih/vim-go'
 
 " javascripts
 Bundle 'leshill/vim-json'
@@ -463,13 +459,8 @@ let g:ale_fix_on_save = 1
 " }}}
 
 "go
-"
-autocmd FileType go nnoremap <buffer> gd :call GodefUnderCursor()<cr> 
-autocmd FileType go nnoremap <buffer> <C-d> :call GodefUnderCursor()<cr>
-let g:godef_same_file_in_same_window=1 "函数在同一个文件中时不需要打开新窗口
-let g:godef_split=0 "在光标下定义出打开新窗口
 "autocmd FileType go nnoremap <C-f> :Autoformat<CR>:w<CR>
-
+autocmd FileType go nnoremap <buffer> <C-d> :GoDef<cr>
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
@@ -522,7 +513,6 @@ function! UpdateCscopeGo()
     !cscope -bkq -i cscope.files
 endfunction
 nmap <F4> :call UpdateCscopeGo()<CR>
-autocmd FileType go nmap <C-]> :cs find s <C-R>=expand("<cword>")<CR><CR>
 autocmd FileType go map <C-f> :ALEToggle<CR>
 
 "python function refer support"
@@ -531,8 +521,7 @@ function! UpdateCscopePython()
     !pycscope -i cscope.files
 endfunction
 nmap <F5> :call UpdateCscopePython()<CR>
-autocmd FileType python nmap <C-]> :cs find s <C-R>=expand("<cword>")<CR><CR>
-autocmd FileType python nmap <C-d> :cs find g <C-R>=expand("<cword>")<CR><CR>
+autocmd FileType python nmap <C-d> :cs find g <C-d>=expand("<cword>")<CR><CR>
 autocmd FileType python map <C-f> :ALEToggle<CR>
 "python"
 let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
