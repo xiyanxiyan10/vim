@@ -46,8 +46,8 @@ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 pip install --upgrade autopep8
 pip install --upgrade flake8
 pip install --upgrade pycscope
-pip install vim-vint
-pip install pylint
+pip install --upgrade vim-vint
+pip install --upgrade pylint
 sudo gem install mdl
 sudo cnpm install -g eslint-plugin-react
 sudo cnpm install -g eslint
