@@ -10,9 +10,10 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
+"Bundle 'scrooloose/syntastic'
 Bundle 'w0rp/ale'
 Bundle 'altercation/vim-colors-solarized'
-
+"Bundle 'jodosha/vim-godebug'
 Bundle 'ternjs/tern_for_vim'
 "Bundle 'python-mode/python-mode'
 
@@ -28,6 +29,7 @@ Bundle 'vim-scripts/indentpython.vim'
 Bundle 'rkulla/pydiction'
 Bundle 'nvie/vim-flake8'
 Bundle 'vim-scripts/pylint.vim'
+Bundle 'Chiel92/vim-autoformat'
 
 " Go
 Bundle 'fatih/vim-go'
@@ -35,7 +37,7 @@ Bundle 'fatih/vim-go'
 " javascripts
 Bundle 'leshill/vim-json'
 Bundle 'tpope/vim-markdown'
-Bundle 'pangloss/vim-javascript'
+"Bundle 'pangloss/vim-javascript'
 Bundle 'mxw/vim-jsx'
 Bundle 'othree/html5.vim'
 Bundle 'lepture/vim-css'
@@ -59,6 +61,8 @@ set listchars=tab:>-,trail:-,nbsp:.,eol:$
 
 set incsearch   "find the next match as we type the search
 set hlsearch    "hilight searches by default
+
+set maxmempattern=20000
 
 set wrap        "dont wrap lines
 set linebreak   "wrap lines at convenient points
@@ -119,11 +123,10 @@ set hidden
 
 set nobackup " no *~ backup files
 "colors koehler
-"colors kolor
-syntax enable
-set background=light
-colorscheme solarized
-let g:solarized_termcolors=256
+colors kolor
+"syntax enable
+"set background=dark
+"colorscheme solarized
 "--------------------------------------------------------------------------- 
 " ENCODING SETTINGS
 "--------------------------------------------------------------------------- 
@@ -498,18 +501,21 @@ let g:tagbar_type_go = {
 let g:jsx_ext_required = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_always_populate_loc_list = 1
+
 " auto-formatter
-function! ESlintFormatter()
-    let l:npm_bin = ''
-    let l:eslint = 'eslint'
-    if executable('npm')
-        let l:npm_bin = split(system('npm bin'), '\n')[0]
-    endif
-    if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
-        let l:eslint = l:npm_bin . '/eslint'
-    endif
-    let g:formatdef_eslint = '"SRC=eslint-temp-${RANDOM}.js; cat - >$SRC; ' . l:eslint . ' --fix $SRC >/dev/null 2>&1; cat $SRC | perl -pe \"chomp if eof\"; rm -f $SRC"'
-endfunction
+"function! ESlintFormatter()
+"    let l:npm_bin = ''
+"    let l:eslint = 'eslint'
+"    if executable('npm')
+"        let l:npm_bin = split(system('npm bin'), '\n')[0]
+"    endif
+"    if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
+"        let l:eslint = l:npm_bin . '/eslint'
+"    endif
+"    let g:formatdef_eslint = '"SRC=eslint-temp-${RANDOM}.js; cat - >$SRC; ' . l:eslint . ' --fix $SRC >/dev/null 2>&1; cat $SRC | perl -pe \"chomp if eof\"; rm -f $SRC"'
+"endfunction
+
+let g:go_version_warning = 0
 
 "go function refer support"
 function! UpdateCscopeGo()
@@ -537,8 +543,9 @@ autocmd FileType python map <C-f> :ALEToggle<CR>
 "js
 autocmd FileType javascript nnoremap <leader>d :TernDef<CR>
 autocmd FileType javascript setlocal omnifunc=tern#Complete
-autocmd FileType javascript map <C-f> :ALEToggle<CR>
-"autocmd FileType javascript nnoremap <C-f> :Autoformat<CR>:w<CR>
+let g:formatdef_eslint = '"SRC=eslint-temp-${RANDOM}.js; cat - >$SRC; eslint --fix $SRC >/dev/null 2>&1; cat $SRC | perl -pe \"chomp if eof\"; rm -f $SRC"'
+let g:formatters_javascript = ['eslint']
+autocmd FileType javascript nnoremap <C-f> :Autoformat<CR>:w<CR>
 
 let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
 
